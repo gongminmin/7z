@@ -67,7 +67,7 @@ bool HasTailSlash(const AString &name, UINT
   if (name.IsEmpty())
     return false;
   char c =
-    #if defined(_WIN32) && !defined(UNDER_CE)
+    #if defined(_WIN32) && !defined(UNDER_CE) && !defined(IS_WINDOWS_STORE)
       *CharPrevExA((WORD)codePage, name, name.Ptr(name.Len()), 0);
     #else
       name.Back();

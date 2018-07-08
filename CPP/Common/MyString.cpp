@@ -1611,7 +1611,7 @@ int MyStringCompareNoCase(const char *s1, const char *s2)
 
 static inline UINT GetCurrentCodePage()
 {
-  #if defined(UNDER_CE) || !defined(_WIN32)
+  #if defined(UNDER_CE) || defined(IS_WINDOWS_STORE) || !defined(_WIN32)
   return CP_ACP;
   #else
   return ::AreFileApisANSI() ? CP_ACP : CP_OEMCP;

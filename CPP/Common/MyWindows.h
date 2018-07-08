@@ -5,6 +5,30 @@
 
 #ifdef _WIN32
 
+#if defined(__MINGW32__)
+#include <_mingw.h>
+#ifndef WINVER
+#define WINVER 0x0601
+#endif
+#else
+#include <sdkddkver.h>
+#endif
+
+#if (_WIN32_WINNT >= 0x0A00 /*_WIN32_WINNT_WIN10*/)
+  #include <winapifamily.h>
+  #if WINAPI_FAMILY == WINAPI_FAMILY_DESKTOP_APP
+    #define IS_WINDOWS_DESKTOP
+  #else
+    #define IS_WINDOWS_STORE
+  #endif
+#else
+  #define IS_WINDOWS_DESKTOP
+#endif
+
+#ifndef IS_WINDOWS_DESKTOP
+#define _OLEAUT32_
+#endif
+
 #include <windows.h>
 
 #ifdef UNDER_CE
