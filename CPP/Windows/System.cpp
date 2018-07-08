@@ -45,7 +45,11 @@ UInt32 GetNumberOfProcessors()
     return pa.GetNumProcessThreads();
 
   SYSTEM_INFO systemInfo;
+#ifdef IS_WINDOWS_DESKTOP
   GetSystemInfo(&systemInfo);
+#else
+  GetNativeSystemInfo(&systemInfo);
+#endif
   // the number of logical processors in the current group
   return (UInt32)systemInfo.dwNumberOfProcessors;
 }
@@ -103,7 +107,7 @@ bool GetRamSize(UInt64 &size)
     stat.dwLength = sizeof(stat);
   #endif
   
-  #ifdef _WIN64
+  #if defined(_WIN64) || defined(_M_ARM) || defined(_M_ARM64)
     
     if (!::GlobalMemoryStatusEx(&stat))
       return false;

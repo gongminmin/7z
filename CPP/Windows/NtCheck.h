@@ -7,7 +7,7 @@
 
 #include "../Common/MyWindows.h"
 
-#if !defined(_WIN64) && !defined(UNDER_CE)
+#if !defined(_WIN64) && !defined(UNDER_CE) && !defined(IS_WINDOWS_STORE)
 static inline bool IsItWindowsNT()
 {
   OSVERSIONINFO vi;
@@ -27,7 +27,7 @@ static inline bool IsItWindowsNT()
   #define NT_CHECK_ACTION
   // #define NT_CHECK_ACTION { NT_CHECK_FAIL_ACTION }
 #else
-  #if !defined(_WIN64) && !defined(UNDER_CE)
+  #if !defined(_WIN64) && !defined(UNDER_CE) && !defined(IS_WINDOWS_STORE)
     #define NT_CHECK_ACTION if (!IsItWindowsNT()) { NT_CHECK_FAIL_ACTION }
   #else
     #define NT_CHECK_ACTION

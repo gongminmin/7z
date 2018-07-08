@@ -152,7 +152,7 @@ inline wchar_t MyCharUpper(wchar_t c) throw()
   if (c < 'a') return c;
   if (c <= 'z') return (wchar_t)(c - 0x20);
   if (c <= 0x7F) return c;
-  #ifdef _WIN32
+  #ifdef IS_WINDOWS_DESKTOP
     #ifdef _UNICODE
       return (wchar_t)(unsigned)(UINT_PTR)CharUpperW((LPWSTR)(UINT_PTR)(unsigned)c);
     #else
@@ -171,7 +171,7 @@ inline wchar_t MyCharLower(wchar_t c) throw()
   if (c < 'A') return c;
   if (c <= 'Z') return (wchar_t)(c + 0x20);
   if (c <= 0x7F) return c;
-  #ifdef _WIN32
+  #ifdef IS_WINDOWS_DESKTOP
     #ifdef _UNICODE
       return (wchar_t)(unsigned)(UINT_PTR)CharLowerW((LPWSTR)(UINT_PTR)(unsigned)c);
     #else
